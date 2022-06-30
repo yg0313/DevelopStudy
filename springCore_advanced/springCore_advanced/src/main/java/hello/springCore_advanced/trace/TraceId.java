@@ -31,7 +31,7 @@ public class TraceId {
      * 로직의 레벨 증가.
      * ex) controller level 1 -> service level 2.
      */
-    private TraceId createNextId(){
+    public TraceId createNextId(){
         return new TraceId(id, level+1);
     }
 
