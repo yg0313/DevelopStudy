@@ -46,4 +46,29 @@ public class TemplateMethodTest {
         AbstractTemplate template2 = new SubClassLogic2();
         template2.execute();
     }
+
+    /**
+     * 익명 내부 클래스 사용.
+     * 클래스를 새로 생성하여 만들 필요 없음.
+     */
+    @Test
+    void templateMethodV2(){
+        AbstractTemplate template1 = new AbstractTemplate(){
+            @Override
+            protected void call() {
+                log.info("비즈니스 로직1 실행");
+            }
+        };
+        log.info("클래스 이름1={}", template1.getClass());
+        template1.execute();
+
+        AbstractTemplate template2 = new AbstractTemplate(){
+            @Override
+            protected void call() {
+                log.info("비즈니스 로직2 실행");
+            }
+        };
+        log.info("클래스 이름2={}", template2.getClass());
+        template2.execute();
+    }
 }
