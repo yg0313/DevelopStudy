@@ -28,6 +28,8 @@
     - Subscriber가 수시할 첫 번째 이벤트는 onSubscirbe()의 호출을 통해 이루어진다.
     - Publisher가 onSubsribe()를 호출할 때 이 메소드의 인자로 Subscription 객체를 Subscriber에 전달.  
     - Subscription 객체를 통해서 구독 관리.
+    - 데이터 요청이 완료되면 데이터가 스트림을 통해 전달되기 시작, 이때 onNext() 메소드가 호출되어 Publisher가 전송하는 데이터가 Subscriber에게 전달되며 에러가 발생하는 경우, onError() 호출.
+    - Publisher에서 전송할 데이터가 없고 더 이상의 데이터를 생성하지 않는다면 Publisher가 onComplete()를 호출하여 작업이 끝났다고 Subscriber에게 전달.
   ```
     public interface Subscriber<T> {
       public void onSubscribe(Subscription s);
@@ -36,9 +38,23 @@
       public void onComplete();
     }
   ```
-  - Subscription(구독)  
-    
-  - Processor(프로세서) 
+  - Subscription(구독)
+    - Subscriber는 request()를 호출하여 전송되는 데이터를 요청.
+    - 받고자하는 데이터 항목 수를 long 타입의 값을 인자로 전달 -> 이 과정이 백 프레이셔이며, 더 많은 데이터를 Publisher가 전송하는 것을 방지.
+    - 더 이상 데이터를 수신하지 않고 구독을 취소하는 경우 cancel() 호출.   
+    ```
+      public inteface Subscription {
+        void request(long n);
+        void cancel();
+      }
+    ```
+  - Processor(프로세서)  
+    - Subscriber 역할로 데이터를 수신하고 처리 후, 역할을 바꾸어 Publisher 역할로 처리 결과를 자신의 Subscriber들에게 발행.
+    ```
+      public interface Processor<T, R> extends Subscriber<T>, Publisher<R> {
+      
+      }
+    ```
 
 
 
