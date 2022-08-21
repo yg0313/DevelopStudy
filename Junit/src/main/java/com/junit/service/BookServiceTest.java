@@ -1,4 +1,4 @@
 package com.junit.service;
 
-public class BookServiceTest `{
+public class BookServiceTest{
 }
