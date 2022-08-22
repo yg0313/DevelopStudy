@@ -51,20 +51,44 @@
   - Processor(프로세서)  
     - Subscriber 역할로 데이터를 수신하고 처리 후, 역할을 바꾸어 Publisher 역할로 처리 결과를 자신의 Subscriber들에게 발행.
     ```
-      public interface Processor<T, R> extends Subscriber<T>, Publisher<R> {
-      
-      }
-    ```
+      public interface Processor<T, R> extends Subscriber<T>, Publisher<R> {}
+    ```  
 
+### 리액터 시작
+- 리액티브 프로그래밍은 일련의 작업 단계를 기술하는 것이 ㅏ닌 데이터가 전달될 파이프라인을 구성하는 것
+- 해당 파이프라인을 통해 데이터가 전달되는 동안 어떤 형태로든 변경 또는 사용될 수 있다.
+- 명령형 코드 vs 리액티브 코드
 
+```java
+// 명령형 코드
+fun imperativeCodeTest() {
+    val name = "Craig"
+    val capitalName = name.uppercase()
+    val greeting = "Hello, $capitalName!"
+		println(greeting)
+}
+```
 
+```java
+/**
+ * 리액티브 코드
+ * 데이터가 전달되는 파이프라인 구성.
+ * 파이프라인의 각 단계에서는 어떻게 하든 데이터가 변경.
+ * 각 오퍼레이션은 같은 스레드로 실행되거나 다른 스레드로 실행될 수 있다.
+ */
+fun reactiveCodeTest(){
+    Mono.just("Craig")
+        .map{
+            it.uppercase()
+        }.map {
+            "Hello, $it!"
+        }.subscribe(System.out::println)
+}
+```
 
-
-
-
-
-
-
+- 리액터의 타입으로는 Mono와 Flux가 있으며, 두 개 모두 리액티브 스트림의 Publisher 인터페이스를 구현한 것이다.
+    - Flux - 0,1 또는 다수의 데이터를 갖는 파이프라인을 나타낸다.
+    - Mono - 하나의 데이터 항목만 갖는 데이터셋에 최적화된 리액티브 타입.
 
 
 
