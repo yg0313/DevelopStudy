@@ -35,4 +35,18 @@ class ReactiveTypeTest {
             .expectNext("Strawberry")
             .verifyComplete()
     }
+
+    @Test
+    @DisplayName("Flux 데이터 생성하기 - 증가하는 값 만들기")
+    fun createFluxRange(){
+        val rangeFlux = Flux.range(1,5)
+
+        StepVerifier.create(rangeFlux)
+            .expectNext(1)
+            .expectNext(2)
+            .expectNext(3)
+            .expectNext(4)
+            .expectNext(5)
+            .verifyComplete()
+    }
 }
