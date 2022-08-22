@@ -140,6 +140,27 @@ fun reactiveCodeTest(){
     }
     ```
 
+- 컬렉션으로부터 생성하기
+    - Flux는 배열, Iterable 객체, 자바 Stream 객체로부터 생성될 수도 있다.
+
+    ```java
+    @Test
+    @DisplayName("컬렉션으로 부터 생성 - List")
+    fun createFluxList(){
+        val fruitsList = listOf("Apple", "Orange", "Grape", "Banana", "Strawberry")
+        val fruitFlux = Flux.fromIterable(fruitsList)
+    
+        StepVerifier.create(fruitFlux)
+            .expectNext("Apple")
+            .expectNext("Orange")
+            .expectNext("Grape")
+            .expectNext("Banana")
+            .expectNext("Strawberry")
+            .verifyComplete()
+    }
+    ```
+
+  ** StepVerifier를 통해 fruitFlux를 구독한 후 각 데이터 항목의 기대한 과일이름(fruit)과 일치하는지 어서셔을 적용한다.
 
 -------------------------
 참고 : 스프링 인 액션  

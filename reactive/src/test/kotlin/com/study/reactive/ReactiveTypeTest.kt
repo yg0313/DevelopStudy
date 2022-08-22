@@ -20,4 +20,19 @@ class ReactiveTypeTest {
             .expectNext("StrawBerry")
             .verifyComplete()
     }
+
+    @Test
+    @DisplayName("컬렉션으로 부터 생성 - List")
+    fun createFluxList(){
+        val fruitsList = listOf("Apple", "Orange", "Grape", "Banana", "Strawberry")
+        val fruitFlux = Flux.fromIterable(fruitsList)
+
+        StepVerifier.create(fruitFlux)
+            .expectNext("Apple")
+            .expectNext("Orange")
+            .expectNext("Grape")
+            .expectNext("Banana")
+            .expectNext("Strawberry")
+            .verifyComplete()
+    }
 }
