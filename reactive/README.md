@@ -90,7 +90,55 @@ fun reactiveCodeTest(){
     - Flux - 0,1 또는 다수의 데이터를 갖는 파이프라인을 나타낸다.
     - Mono - 하나의 데이터 항목만 갖는 데이터셋에 최적화된 리액티브 타입.
 
+## 리액티브 오퍼레이션 적용
 
+- Flux와 Mono는 리액터가 제공하는 가장 핵심적인 구성 요소(리액티브 타입)이다.
+- Flux와 Mono가 제공하는 오퍼레이션들을 통해 두 타입을 함께 결합하여 데이터가 전달될 수 있는 파이프라인을 생성한다.
+- 오퍼레이션 종류
+    - 생성(creation) 오퍼레이션
+    - 조합(combination) 오퍼레이션
+    - 변환(transformation) 오퍼레이션
+    - 로직(logic) 오퍼레이션
+    
+
+### 리액티브 타입 생성하기
+
+- 객체로부터 생성하기
+    - Flux나 Mono로 생성하려는 하나 이상의 객체가 있다면 just() 메소드(static 메소드)를 사용하여 리액티브 타입을 생성할 수 있다.
+    
+    ```java
+    @Test
+    @DisplayName("객체로부터 생성 - Flux")
+    fun createFluxJust(){
+        val fruitFlux = Flux.just("Apple", "Orange", "Grape", "Banana", "StrawBerry")
+    }
+    ```
+    
+    - Flux는 생성되었지만, 구독자(subscriber)가 없기 때문에, 데이터가 전달되지 않는다.
+    - 리액티브ㅡ 타입을 구독한다는 것은 데이터가 흘러갈 수 있게 하는 것이다.
+    
+    ```java
+    // 구독자 추가
+    fruitflux.subscribe{
+    	println("Here's some fruit : $it")
+    }
+    ```
+    
+    - subscribe()는 java.util.Consumer이며, 이것은 리액티브 스트림의 Subscriber 객체를 생성하기 위해 사용된다.
+    - subscribe()를 호출하는 즉시 데이터가 전달되기 시작한다.
+    
+    ```java
+    //전체코드
+    @Test
+    @DisplayName("객체로부터 생성 - Flux")
+    fun createFluxJust(){
+    	  val fruitFlux = Flux.just("Apple", "Orange", "Grape", "Banana", "StrawBerry")
+    		
+    		fruitflux.subscribe{
+    			println("Here's some fruit : $it")
+    		}
+    }
+    ```
 
 
 -------------------------
