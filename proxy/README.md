@@ -10,6 +10,8 @@
 ## 리플렉션  
 
 ```java
+// 리플렉션 적용 전  
+
 Hello target = new Hello();
 
 //공통 로직1 시작
@@ -25,5 +27,35 @@ log.info("result={}", result2);
 //공통 로직2 종료
 ```
 
-- 리플렉션
-    - 클래스나 메소드의 메타정보를 사용해서 동적으로 호출하는 메소드를 변경할 수 있다.
+- 리플렉션 : 클래스나 메소드의 메타정보를 사용해서 동적으로 호출하는 메소드를 변경할 수 있다.
+      
+```java
+// 리플렉션 적용 후  
+@Test
+void reflectionTest() throws Exception{
+    //클래스 정보
+    Class classHello = Class.forName("hello.proxy.jdkdynamic.ReflectionTest$Hello");
+
+    Hello target = new Hello();
+    //callA 메소드 정보
+    Method methodCallA = classHello.getMethod("callA");
+    dynamicCall(methodCallA, target);
+
+    //callB 메소드 정보
+    Method methodCallB = classHello.getMethod("callB");
+    dynamicCall(methodCallB, target);
+}
+
+/**
+ * A,B를 한번에 처리할 수 있는 공통처리 로직.
+ * 리플렉션을 사용하여 Method라는 메타정보를 추상화.
+ */
+private void dynamicCall(Method method, Object target) throws Exception {
+    log.info("start");
+    Object result = method.invoke(target);
+    log.info("result={}", result);
+}
+```  
+
+- 런타임에 동작하기 때문에, 컴파일 시점에 오류를 잡을 수 없다.  
+- 정말 필요한 상황이 아니면 일반적으로는 사용을 권장하지 않는다.
