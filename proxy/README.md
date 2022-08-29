@@ -8,3 +8,22 @@
     - 데코레이터패턴에서의 체인 --> 부가기능을 계속해서 추가.  
 
 ## 리플렉션  
+
+```java
+Hello target = new Hello();
+
+//공통 로직1 시작
+log.info("start");
+String result1 = target.callA(); //호출 메소드가 다름
+log.info("result={}", result1);
+//공통 로직1 종료
+
+//공통 로직2 시작
+log.info("start");
+String result2 = target.callB(); //호출 메소드가 다름
+log.info("result={}", result2);
+//공통 로직2 종료
+```
+
+- 리플렉션
+    - 클래스나 메소드의 메타정보를 사용해서 동적으로 호출하는 메소드를 변경할 수 있다.
