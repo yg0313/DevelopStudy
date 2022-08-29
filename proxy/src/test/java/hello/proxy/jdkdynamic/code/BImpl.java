@@ -10,4 +10,9 @@ public class BImpl implements BInterface{
         log.info("B 호출");
         return "b";
     }
+
+    @Override
+    public void test() {
+        log.info("B Test 호출");
+    }
 }
