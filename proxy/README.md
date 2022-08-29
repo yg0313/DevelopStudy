@@ -65,3 +65,17 @@ private void dynamicCall(Method method, Object target) throws Exception {
 
 - 개발자가 직접 프록시 클래스를 만들지 않고, 프록시 객체를 동적으로 런타임에 개발자 대신 만들어 준다.  
 - 인터페이스를 기반의로 프록시를 동적으로 만들어준다. —> **인터페이스 필수**  
+
+```java
+// JDK 동적 프록시가 제공하는 InvocationHandler
+package java.lang.reflect;
+
+/**
+* proxy : 프록시 자신
+* method : 호출한 메소드
+* args : 메소드를 호출할 때 전달한 인수
+*/
+public interface InvocationHandler{
+	public Object invoke(Object proxy, Method method, Object[] args) throw Throwable;
+}
+```
