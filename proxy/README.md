@@ -89,7 +89,12 @@ public interface InvocationHandler{
 - 제공 인터페이스
 ```java
 package org.springframework.cglib.proxy;
-
+/**
+* obj : CGLIB가 적용된 객체
+* method : 호출된 메소드
+* args : 메소드를 호출하면서 전달된 인수
+* proxy : 메소드 호출에 사용
+*/
 public interface MethodInterceptor extends Callback {
 	 Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) 
 				throws Throwable;
