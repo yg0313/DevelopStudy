@@ -115,3 +115,5 @@ public interface MethodInterceptor extends Callback {
 - 프록시 팩토리를 사용하기 이전에는 JDK 동적 프록시의 `InvocationHandler` CGLIB가 제공하는 `MethodInterceptor` 를 각각 구현하여 사용했지만, 프록시 팩토리를 이용하면  Advice를 이용하여 해결하면 된다.  
 ![image](https://user-images.githubusercontent.com/11959111/188117349-03b57c38-795c-4fa5-8e77-2eb8eab9c679.png)
 - 프록시 팩토리를 사용하면 Advice를 호출하는 전용 `InvocationHandler` , `MethodInterceptor` 를 내부에서 사용한다.
+
+** 스프링 부트는 AOP를 적용할 때 기본적으로 proxyTargetClass=true 로 설정해서 사용, 따라서 인터페이스가 있어도 항상 CGLIB를 사용해서 구체 클래스를 기반으로 프록시를 생성한다.
