@@ -1,5 +1,5 @@
 # DevelopStudy
-- 공부하면서 정리..
+공부하면서 정리..
 
 ### [springCore_advanced](https://github.com/yg0313/DevelopStudy/tree/main/springCore_advanced)
 
