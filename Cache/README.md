@@ -3,7 +3,7 @@
 ### 환경  
 - jdk 17  
 - springBoot 2.7.2  
-- spring webFlux
+- spring webflux
 - MonogoDB  
 
 ## Reactive Redis  
