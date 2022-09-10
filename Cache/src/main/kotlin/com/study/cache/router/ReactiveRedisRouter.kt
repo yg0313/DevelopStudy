@@ -8,15 +8,13 @@ import org.springframework.http.MediaType
 import org.springframework.web.reactive.function.server.*
 
 @Configuration
-class ReactiveRedisRouter{
-
-    @Autowired
-    private lateinit var reactiveRedisHandler : ReactiveRedisHandler
+class ReactiveRedisRouter(private val reactiveRedisHandler : ReactiveRedisHandler){
 
     @Bean
     fun route(): RouterFunction<ServerResponse> = router {
         "/redis".nest {
-            GET("/{id}", reactiveRedisHandler::redisTest)
+            POST("/addUser", reactiveRedisHandler::addUser)
+            GET("/{id}", reactiveRedisHandler::getUser)
         }
     }
 }
