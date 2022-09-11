@@ -49,7 +49,6 @@ fun reactiveRedisTemplate(): ReactiveRedisTemplate<String, Any> {
     return ReactiveRedisTemplate(reactiveRedisConnectionFactory(), context)
 }
 ```
-
 ```kotlin
 /**
 * 데이터 조회
@@ -60,25 +59,26 @@ class ReactiveRedisServiceImpl(private val reactiveRedisTemplate: ReactiveRedisT
 
     private lateinit var redisValueOps : ReactiveValueOperations<String,Any>
 
-		/**
-		* userId값을 키값으로 사용
-		* 해당 키에 대한 value가 없으면 DB직접 조회 후, Redis 저장 후 값 반환
-		*/
-		fun getUser(userId: String): Mono<Any> {
-		        redisValueOps = reactiveRedisTemplate.opsForValue()
-		
-		        val query = Query().addCriteria(Criteria().and("userId").`is`(userId))
-						
-		        return redisValueOps.get(userId).switchIfEmpty(
-		            repository.getUser(query).flatMap {user ->
-		                redisValueOps.set(userId, user, Duration.ofMinutes(30)).subscribe()
-		                Mono.just(user)
-		            }
-		        ).flatMap {
-		            Mono.just(it)
-		        }
-		    }
+    /**
+    * userId값을 키값으로 사용
+    * 해당 키에 대한 value가 없으면 DB직접 조회 후, Redis 저장 후 값 반환
+    */
+    fun getUser(userId: String): Mono<Any> {
+        redisValueOps = reactiveRedisTemplate.opsForValue()
+
+        val query = Query().addCriteria(Criteria().and("userId").`is`(userId))
+
+        return redisValueOps.get(userId).switchIfEmpty(
+            repository.getUser(query).flatMap {user ->
+	        redisValueOps.set(userId, user, Duration.ofMinutes(30)).subscribe()
+	        Mono.just(user)
+            }
+        ).flatMap {
+            Mono.just(it)
+        }
+    }
 }
 ```
+
 
 ## Caffeine Cache
