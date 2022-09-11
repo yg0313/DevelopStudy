@@ -22,10 +22,8 @@
 /**
 * Bean 설정
 */
-@Value("\${spring.redis.host}")
 private val redisHost = "127.0.0.1" //로컬 환경
 
-@Value("\${spring.redis.port}")
 private val redisPort = 6379 //redis 기본 포트번호
 
 @Bean
