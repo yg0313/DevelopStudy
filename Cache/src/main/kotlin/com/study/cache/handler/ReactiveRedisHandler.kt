@@ -21,4 +21,13 @@ class ReactiveRedisHandler(private val service : ReactiveRedisService) {
             ok().body(Mono.just(it))
         }
     }
+
+    fun getUser(request: ServerRequest) : Mono<ServerResponse>{
+        val userId = request.pathVariable("id")
+
+        return service.getUser(userId).flatMap {user ->
+            ok().body(Mono.just(user))
+        }
+
+    }
 }

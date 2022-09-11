@@ -1,5 +1,6 @@
 package com.study.cache.config
 
+import com.study.cache.domain.User
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -27,13 +28,13 @@ class CacheConfig {
     }
 
     @Bean
-    fun reactiveRedisTemplate(): ReactiveRedisTemplate<String, String> {
+    fun reactiveRedisTemplate(): ReactiveRedisTemplate<String, Any> {
         val keySerializer = StringRedisSerializer()
-        val valueSerializer: Jackson2JsonRedisSerializer<String> =
-            Jackson2JsonRedisSerializer(String::class.java)
-        val builder: RedisSerializationContextBuilder<String, String> =
+        val valueSerializer: Jackson2JsonRedisSerializer<Any> =
+            Jackson2JsonRedisSerializer(Any::class.java)
+        val builder: RedisSerializationContextBuilder<String,Any> =
             RedisSerializationContext.newSerializationContext(keySerializer)
-        val context: RedisSerializationContext<String, String> = builder.value(valueSerializer).build()
+        val context: RedisSerializationContext<String, Any> = builder.value(valueSerializer).build()
         return ReactiveRedisTemplate(reactiveRedisConnectionFactory(), context)
     }
 }

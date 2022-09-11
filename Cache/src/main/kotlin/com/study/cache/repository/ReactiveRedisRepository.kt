@@ -11,4 +11,5 @@ class ReactiveRedisRepository(private val template : ReactiveMongoTemplate)  {
 
     fun addUser(user:User) = template.save(user)
 
+    fun getUser(query: Query) = template.findOne(query, User::class.java, "user")
 }

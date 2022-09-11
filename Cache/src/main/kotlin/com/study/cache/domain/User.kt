@@ -10,5 +10,5 @@ data class User(val name:String , val phone:String){
 
     @JsonIgnore
     private lateinit var id : ObjectId
-    private val userId : String = UUID.randomUUID().toString().substring(0,10)
+    var userId : String = UUID.randomUUID().toString().substring(0,10)
 }
