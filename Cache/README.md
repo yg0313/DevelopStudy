@@ -79,5 +79,7 @@ class ReactiveRedisServiceImpl(private val reactiveRedisTemplate: ReactiveRedisT
 }
 ```
 
+참고  
+https://www.baeldung.com/spring-data-redis-reactive  
 
 ## Caffeine Cache
