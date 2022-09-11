@@ -62,6 +62,7 @@ class ReactiveRedisServiceImpl(private val reactiveRedisTemplate: ReactiveRedisT
     /**
     * userId값을 키값으로 사용
     * 해당 키에 대한 value가 없으면 DB직접 조회 후, Redis 저장 후 값 반환
+    * TTL 30분으로 설정
     */
     fun getUser(userId: String): Mono<Any> {
         redisValueOps = reactiveRedisTemplate.opsForValue()
