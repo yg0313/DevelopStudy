@@ -1,6 +1,5 @@
 package com.study.cache.service
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.study.cache.domain.User
 import com.study.cache.repository.ReactiveRedisRepository
 import org.springframework.data.mongodb.core.query.Criteria
@@ -9,7 +8,6 @@ import org.springframework.data.redis.core.ReactiveRedisTemplate
 import org.springframework.data.redis.core.ReactiveValueOperations
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
-import reactor.kotlin.core.publisher.switchIfEmpty
 import java.time.Duration
 
 interface ReactiveRedisService {
