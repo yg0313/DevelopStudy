@@ -141,21 +141,21 @@ public interface MethodInterceptor extends Callback {
 ![image](https://user-images.githubusercontent.com/11959111/188322997-16a98fe8-d8da-420f-bcc8-50fc29271441.png)
 
 
-## 빈 후기처리
+## 빈 후처리기
 
 ![image](https://user-images.githubusercontent.com/11959111/190174776-ba501fd2-298c-490b-a4f9-a4720bac72ac.png)  
 
 - `@Bean` 이나 컴포넌트 스캔으로 스프링 빈을 등록하면, 스프링은 대상 객체를 생성하고 스프링 컨테이너 내부의 빈 저장소에 등록한다. 이후에 스프링 컨테이너를 통해 등록한 스프링 빈을 조회해서 사용한다.
 
-### 빈 후기처리 - BeanPostProcessor
+### 빈 후처리기 - BeanPostProcessor
 
 스프링이 빈 저장소를 등록할 목적으로 생성한 객체를 빈 저장소에 등록하기 직전에 조작하고 싶다면 빈 후기처리를 사용하면 된다. 빈 포스트 프로세서(BeanPostProcessor)는 빈을 생성한 후에 무언가를 처리하는 용도로 사용한다.
 
-**빈 후기처리 기능**
+**빈 후처리기 기능**
 
 - 객체를 조작할 수도 있고, 완전히 다른 객체로 바꿔치기 하는 것도 가능하다.
 
-**빈 후기처리 과정**
+**빈 후처리기 과정**
 
 ![image](https://user-images.githubusercontent.com/11959111/190178937-1c590e22-301c-4d47-8aff-6fae2935980a.png)  
 
