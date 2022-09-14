@@ -164,4 +164,5 @@ public interface MethodInterceptor extends Callback {
 3. 후 처리 작업 : 빈 후처리기는 전달된 스프링 빈 객체를 조작하거나 다른 객체로 바꿔치기 할 수 있다.
 4. 등록 : 빈 후처리긴느 빈을 반환한다. 전달 된 빈을 그대로 반환하면 해당 빈이 등록되고, 바꿔치기 하면 다른 객체가 빈 저장소에 등록된다.
 
+![image](https://user-images.githubusercontent.com/11959111/190181715-50256c5f-5f38-4642-b092-6498e225b9d0.png)
 
