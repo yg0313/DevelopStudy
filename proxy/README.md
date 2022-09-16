@@ -184,7 +184,7 @@ implementation('org.springframework.boot::spring-boot-starter-aop')
 ```
 
 - 스프링 부트 자동 설정으로 `AnnotationAwareAsjpectJAutoProxyCreator` 빈 후처리기가 스프링 빈에 자동 등록된다.
-- 스프링 빈으로 등록된 Advisor들을 자동으로 찾아서 프록시가 필요한 곳에 자동으로 프록시를 적용해준다.
+- 스프링 빈으로 등록된 `Advisor`들을 자동으로 찾아서 프록시가 필요한 곳에 자동으로 프록시를 적용해준다.
 - `Advisor` 안에는 `Pointcut`과 `Advice`가 이미 모두 포함되어 있으므로, `Advisor`만 알고 있으면 그 안에 있는 `Pointcut`으로 어떤 스프링 빈에 프록시를 적용해야 할지 알 수 있다. 그리고 `Advice`로 부가 기능을 적용하면 된다.
 
 ** `AnnotationAwareAspectJAutoProxyCreator` 는 @AspectJ와 관련된 AOP 기능도 자동으로 찾아서 처리해준다.
