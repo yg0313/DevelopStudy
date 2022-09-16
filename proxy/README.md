@@ -180,7 +180,7 @@ public interface MethodInterceptor extends Callback {
 
 ```kotlin
 // gradle에 추가
-implementation('org.springframework.boot::spring-boot-starter-aop')
+implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
 ```
 
 - 스프링 부트 자동 설정으로 `AnnotationAwareAsjpectJAutoProxyCreator` 빈 후처리기가 스프링 빈에 자동 등록된다.
