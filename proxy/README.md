@@ -188,3 +188,9 @@ implementation('org.springframework.boot::spring-boot-starter-aop')
 - `Advisor` 안에는 `Pointcut`과 `Advice`가 이미 모두 포함되어 있으므로, `Advisor`만 알고 있으면 그 안에 있는 `Pointcut`으로 어떤 스프링 빈에 프록시를 적용해야 할지 알 수 있다. 그리고 `Advice`로 부가 기능을 적용하면 된다.
 
 ** `AnnotationAwareAspectJAutoProxyCreator` 는 @AspectJ와 관련된 AOP 기능도 자동으로 찾아서 처리해준다.
+
+
+***자동 프록시 생성기 작동 과정***  
+
+![image](https://user-images.githubusercontent.com/11959111/190653056-8b3688b0-fd13-4bbb-96af-e3a5a308079c.png)
+
