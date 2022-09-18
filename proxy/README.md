@@ -241,3 +241,10 @@ implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop
 - `advisor1`의 포인트컷만 만족 → 프록시 1개 생성, 프록시에 `advisor1` 만 포함
 - `advisor1, advisor2` 의 포인트컷 모두 만족 → 프록시 1개 생성, 프록시에 `advisor1,advisor2` 모두 포함
 - `advisor1, advisor2` 의 포인트컷 모두 불만족 → 프록시가 생성되지 않음.
+
+
+## @Aspect AOP
+
+스프링은 `@Aspect` 어노테이션으로 포인트컷과 어드바이스로 구성되어 있는 어드바이저 생성 기능을 지원한다.
+
+** @Aspect 는 관점 지향 프로그래밍(AOP)을 가능하게 하는 AspectJ 프로젝트에서 제공하는 어노테이션으로 스프링은 이것을 차용해서 프록시를 통한 AOP를 가능하게 한다.
