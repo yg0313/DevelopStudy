@@ -13,7 +13,6 @@
 ex) 요청 값이나, 응답 값을 중간에 변형한다.  
     실행 시간을 측정해서 추가 로그를 남긴다.  
   
-  
 ## 프록시 패턴과 데코레이터 패턴  
 - 프록시 패턴 : 접근 제어가 목적
   - 체인이 가능함  --> 역할 위임이 가능  
@@ -21,8 +20,9 @@ ex) 요청 값이나, 응답 값을 중간에 변형한다.
   ex) 요청 값이나, 응답 값을 중간에 변형.  
   ex) 실행 시간을 측정해서 추가 로그를 남긴다.
     - 데코레이터패턴에서의 체인 --> 부가기능을 계속해서 추가.  
+<br/>
 
-## 리플렉션  
+## 리플렉션   
 
 ```java
 // 리플렉션 적용 전  
@@ -189,7 +189,7 @@ implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop
 
 ** `AnnotationAwareAspectJAutoProxyCreator` 는 @AspectJ와 관련된 AOP 기능도 자동으로 찾아서 처리해준다.
 
-
+<br/>
 ***자동 프록시 생성기 작동 과정***  
 
 ![image](https://user-images.githubusercontent.com/11959111/190653056-8b3688b0-fd13-4bbb-96af-e3a5a308079c.png)
@@ -255,7 +255,7 @@ implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop
 
 ** AOP는 OOP를 대체하기 위한 것이 아닌 횡단 관심사를 깔끔하게 처리하기 어려운 OOP의 부족한 부분을 보조하는 목적으로 개발.
 
-
+<br/>
 스프링은 `@Aspect` 어노테이션으로 포인트컷과 어드바이스로 구성되어 있는 어드바이저 생성 기능을 지원한다.
 ```kotlin
 @Aspect
@@ -278,8 +278,8 @@ public class AspectTest{
 1. 실행 : 스프링 애플리케이션 로딩 시점에 자동 프록시 생성기를 호출한다.
 2. 모든 @Aspect 빈 조회 : 자동 프록시 생성기는 스프링 컨테이너에서 @Aspect 어노테이션이 붙은 스프링 빈을 모두 조회한다.
 3. 어드바이저 생성 : @Aspect 어드바이저 빌더ㅐ를 통해  @Aspect 어노테이션 정보를 기반으로 어드바이저를 생성한다.
-4. @Aspect 기반 어드바이저 저장 : 생성한 어드바이저를 @Aspect 어드바이저 빌더 내부에 저장한다.
-
+4. @Aspect 기반 어드바이저 저장 : 생성한 어드바이저를 @Aspect 어드바이저 빌더 내부에 저장한다. 
+<br/>
  **@Aspect 어드바이저 빌더**
 
 `BeanFactoryAspectJAdvisorsBuilder` 클래스, @Aspect의 정보를 기반으로 포인트컷, 어드바이스, 어드바이저를 생성하고 보관하는 것을 담당한다. @Aspect의 정보를 기반으로 어드바이저를 만들고, @Aspect 어드바이저 빌더 내부 저장소에 캐시한다. 캐시에 어드바이저가 이미 만들어져 있는 경우 캐시에 저장된 어드바이저를 반환한다.
