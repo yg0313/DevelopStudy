@@ -245,6 +245,17 @@ implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop
 
 ## @Aspect AOP
 
+### 애스펙트
+
+핵심 기능에서 분리한 부가 기능을 어디에 적용할지 선택하는 가능하도록 하나의 모듈로 만든 기술.
+
+에스펙트는 우리말로 해석하면 관점이라는 뜻을 가지고 있다. 뜻대로 애플리케이션을 바라보는 관점을 하나하나의 기느이에서 횡단 관심사(crosscutting concerns)관점으로 보는 것이다.
+
+**애스펙트를 사용한 프로그래밍 방식을 관점 지향 프로그래밍 AOP(Aspect-Oritented Programming)이라고 한다.**
+
+** AOP는 OOP를 대체하기 위한 것이 아닌 횡단 관심사를 깔끔하게 처리하기 어려운 OOP의 부족한 부분을 보조하는 목적으로 개발.
+
+
 스프링은 `@Aspect` 어노테이션으로 포인트컷과 어드바이스로 구성되어 있는 어드바이저 생성 기능을 지원한다.
 ```kotlin
 @Aspect
