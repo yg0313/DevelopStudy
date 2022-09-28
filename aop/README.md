@@ -6,3 +6,6 @@
 - @After Returning : 조인 포인트가 정상 완료후 실행
 - @After Throwing : 메소드가 예외를 던지는 경우 실행
 - @After : 조인 포인트가 정상 또는 예외에 관계없이 실행(finally)
+
+** 모든 어드바이스는 `org.aspectj.lang.JoinPoint`를 첫번째 파라미터에 사용할 수 있다. (생략 가능)  
+  단, @Around는 `ProceedingJoinPoint`를 사용해야 한다.
