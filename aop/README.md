@@ -9,3 +9,16 @@
 
 ** 모든 어드바이스는 `org.aspectj.lang.JoinPoint`를 첫번째 파라미터에 사용할 수 있다. (생략 가능)  
   단, @Around는 `ProceedingJoinPoint`를 사용해야 한다.
+<br/>
+### JoinPoint 인터페이스의 주요 기능
+
+- getArgs() : 메소드 인수를 반환
+- getThis() : 프록시 객체를 반환
+- getTarget() : 대상 객체를 반환
+- getSignature() : 조언되는 메소드에 대한 설명을 반환
+- toString() : 조언되는 방법에 대한 유용한 설명을 인쇄
+
+### ProceedingJoinPoint 인터페이스
+
+- org.aspectj.lang.JoinPoint의 하위 타입
+- proceed() : 다음 어드바이스나 타겟을 호출
