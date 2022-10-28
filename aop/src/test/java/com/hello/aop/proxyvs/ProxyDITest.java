@@ -17,7 +17,7 @@ public class ProxyDITest {
 
     /**
      * CGLIB 프록시는 구체클래스를 기반으로 만들어지므로,
-     * 구체클래스를 상속한 인터페이스 상속도 가능하다.
+     * 구체클래스가 상속한 인터페이스 상속도 가능하다.
      */
     @Autowired
     MemberService memberService;
