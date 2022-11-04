@@ -15,4 +15,4 @@
 
 ### [aop - 스프링 AOP 구현](https://github.com/yg0313/DevelopStudy/tree/main/aop#%EC%8A%A4%ED%94%84%EB%A7%81-aop-%EA%B5%AC%ED%98%84)
 
-### [The RED : 백발의 개발자를 꿈꾸며 : 코드리뷰, 레거시와 TDD by 패캠 ]
+### [The RED : 백발의 개발자를 꿈꾸며 : 코드리뷰, 레거시와 TDD by 백명석, 최범균]
