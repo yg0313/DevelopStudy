@@ -15,3 +15,7 @@ eureka:
   instance:
     # 실행 instanceId 부여
     instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+    hostname: localhost
+
+greeting:
+  message: Welcome to the simple E-commerce.
