@@ -27,6 +27,9 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    // https://mvnrepository.com/artifact/com.h2database/h2
+    runtimeOnly("com.h2database:h2:1.3.176")
 }
 
 dependencyManagement {
