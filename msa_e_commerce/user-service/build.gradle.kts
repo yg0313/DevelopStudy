@@ -36,7 +36,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
-    implementation("org.modelmapper:modelmapper")
+    implementation("org.modelmapper:modelmapper:2.3.8")
+//    implementation("org.modelmapper:modelmapper:3.1.1")
 
 
 }
