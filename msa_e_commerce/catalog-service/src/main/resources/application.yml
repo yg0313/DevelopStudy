@@ -1,0 +1,42 @@
+
+server:
+  port: 0 # port 0 -> random port ??
+
+spring:
+  application:
+    name: catalog-service
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    #name: sa
+    #password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    generate-ddl: true
+    #spring boot2.5 ???? ??? ???? ????? ??
+    database: h2
+    defer-datasource-initialization: true
+
+eureka:
+  client:
+    register-with-eureka: true # eureka ????? ?????? ??? ????? ??????? ???? ??. (true -> ?? ? ??? ??)
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+  instance:
+    # ?? instanceId ??
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+    hostname: localhost
+
+logging:
+  level:
+    com.example.catalogservice: DEBUG

@@ -26,3 +26,8 @@ spring:
           uri: lb://USER-SERVICE #eureka에 등록된 instanceName
           predicates: #조건절
             - Path=/user-service/**
+
+        - id: catalog-service
+          uri: lb://CATALOG-SERVICE #eureka에 등록된 instanceName
+          predicates: #조건절
+            - Path=/catalog-service/**
