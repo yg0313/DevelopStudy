@@ -4,11 +4,8 @@ import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.entity.OrderEntity;
 import com.example.orderservice.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.matcher.StringMatcher;
-import org.bouncycastle.math.raw.Mod;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
