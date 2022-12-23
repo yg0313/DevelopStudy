@@ -4,8 +4,11 @@ import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.entity.OrderEntity;
 import com.example.orderservice.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.matcher.StringMatcher;
+import org.bouncycastle.math.raw.Mod;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -20,11 +23,11 @@ public class OrderServiceImpl implements OrderService{
     public OrderDto createOrder(OrderDto orderDto) {
         orderDto.setOrderId(UUID.randomUUID().toString());
         orderDto.setTotalPrice(orderDto.getQty() * orderDto.getUnitPrice());
-        System.out.println("orderDto = " + orderDto);
+
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         OrderEntity orderEntity = mapper.map(orderDto, OrderEntity.class);
-        System.out.println("orderEntity = " + orderEntity);
+
         orderRepository.save(orderEntity);
 
         OrderDto returnValue = mapper.map(orderEntity, OrderDto.class);
