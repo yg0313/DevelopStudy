@@ -1,13 +1,16 @@
 package com.example.userservice.security;
 
+import com.example.userservice.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.AuthorizationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 import org.springframework.security.web.util.matcher.IpAddressMatcher;
@@ -20,9 +23,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class WebSecurity {
 
     private static final String IP_ADDRESS = "localhost";
+
+    private final UserService userService;
+    private final Environment environment;
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
@@ -39,6 +46,15 @@ public class WebSecurity {
                 .build();
     }
 
+    /**
+     * https://hou27.tistory.com/entry/Spring-Security-%EC%84%B8%EC%85%98-%EC%9D%B8%EC%A6%9D.
+     * Users Microservice - loadUserByUsername() 구현.
+     */
+    @Bean
+    public UserDetailsService userDetailsService(){
+        return userService;
+    }
+
     private AuthorizationManager<RequestAuthorizationContext> hasIpAddress(String ipAddress) {
         IpAddressMatcher ipAddressMatcher = new IpAddressMatcher(ipAddress);
         return (authentication, context) -> {
@@ -47,18 +63,25 @@ public class WebSecurity {
         };
     }
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
 }
 
-//public class WebSecurity extends WebSecurityConfigurerAdapter{
+//@RequiredArgsConstructor
+//class WebSecurity2 extends WebSecurityConfigurerAdapter {
+//
+//    private final UserService userService;
+//    private final Environment environment;
+//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+//
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
 //        http.csrf().disable();
 //        http.authorizeHttpRequests().antMatchers("/users/**").permitAll();
 //
 //        http.headers().frameOptions().disable();
+//    }
+//
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
 //    }
 //}
