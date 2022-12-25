@@ -22,15 +22,43 @@ spring:
             preLogger: true
             postLogger: true
       routes:
+#        - id: user-service
+#          uri: lb://USER-SERVICE #eureka에 등록된 instanceName
+#          predicates: #조건절
+#            - Path=/user-service/**
+        #로그인
+        - id: user-service
+          uri: lb://USER-SERVICE #eureka에 등록된 instanceName
+          predicates: #조건절
+            - Path=/user-service/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        #회원가입
+        - id: user-service
+          uri: lb://USER-SERVICE #eureka에 등록된 instanceName
+          predicates: #조건절
+            - Path=/user-service/users
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        #그 외
         - id: user-service
           uri: lb://USER-SERVICE #eureka에 등록된 instanceName
           predicates: #조건절
             - Path=/user-service/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
 
         - id: catalog-service
           uri: lb://CATALOG-SERVICE #eureka에 등록된 instanceName
           predicates: #조건절
             - Path=/catalog-service/**
+
         - id: order-service
           uri: lb://ORDER-SERVICE
           predicates: #조건절

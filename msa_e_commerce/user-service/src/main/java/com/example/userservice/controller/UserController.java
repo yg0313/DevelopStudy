@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user-service/")
+@RequestMapping("/")
 @RequiredArgsConstructor
 
 /** TODO 회원정보 수정,삭제 */
