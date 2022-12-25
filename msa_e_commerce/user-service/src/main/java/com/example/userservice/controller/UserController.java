@@ -20,6 +20,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/user-service/")
 @RequiredArgsConstructor
+
+/** TODO 회원정보 수정,삭제 */
 public class UserController {
 
     /** application.yml 값을 가져오는 클래스 */
