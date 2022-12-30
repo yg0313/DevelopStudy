@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException(username);
         }
 
-        return new User(userEntity.getEmail(), userEntity.getEncryptPwd(), true, true,
         return new User(userEntity.getEmail(), userEntity.getEncryptedPwd(), true, true,
                 true, true, new ArrayList<>()); //credential packege에 있는 User 클래스
     }
@@ -45,7 +44,6 @@ public class UserServiceImpl implements UserService {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT); //모델매퍼 매칭 전략 설정
 
         UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
-        userEntity.setEncryptPwd(bCryptPasswordEncoder.encode(userDto.getPwd()));
         userEntity.setEncryptedPwd(bCryptPasswordEncoder.encode(userDto.getPwd()));
 
         userRepository.save(userEntity);
@@ -74,5 +72,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public Iterable<UserEntity> getUserByAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public UserDto getUserDetailsByEmail(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email) ;
+        if(userEntity == null){
+            throw new UsernameNotFoundException(email);
+        }
+
+        UserDto userDto = new ModelMapper().map(userEntity, UserDto.class);
+
+        return userDto;
     }
 }
