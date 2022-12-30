@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
         }
 
         return new User(userEntity.getEmail(), userEntity.getEncryptPwd(), true, true,
+        return new User(userEntity.getEmail(), userEntity.getEncryptedPwd(), true, true,
                 true, true, new ArrayList<>()); //credential packege에 있는 User 클래스
     }
 
@@ -45,6 +46,7 @@ public class UserServiceImpl implements UserService {
 
         UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
         userEntity.setEncryptPwd(bCryptPasswordEncoder.encode(userDto.getPwd()));
+        userEntity.setEncryptedPwd(bCryptPasswordEncoder.encode(userDto.getPwd()));
 
         userRepository.save(userEntity);
 
