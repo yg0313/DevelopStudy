@@ -2,9 +2,11 @@ package com.example.userservice.security;
 
 import com.example.userservice.vo.request.RequestLogin;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 /**
  * https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/authentication/UsernamePasswordAuthenticationToken.html
  */
+@Slf4j
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
@@ -34,7 +37,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                     )
             );
 
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
@@ -46,7 +49,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-
-        super.successfulAuthentication(request, response, chain, authResult);
+        log.debug(((User) authResult.getPrincipal()).getUsername());
     }
 }
