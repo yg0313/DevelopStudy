@@ -53,6 +53,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
 
         - id: catalog-service
           uri: lb://CATALOG-SERVICE #eureka에 등록된 instanceName
@@ -63,3 +64,6 @@ spring:
           uri: lb://ORDER-SERVICE
           predicates: #조건절
             - Path=/order-service/**
+
+token:
+  secret: user-token # 임의의 값
