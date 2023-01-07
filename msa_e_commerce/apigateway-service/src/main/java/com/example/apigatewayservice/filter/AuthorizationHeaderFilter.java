@@ -16,10 +16,14 @@ import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
-@RequiredArgsConstructor
 public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<AuthorizationHeaderFilter.Config> {
 
-    private final Environment environment;
+    private Environment environment;
+
+    public AuthorizationHeaderFilter(Environment environment) {
+        super(Config.class);
+        this.environment = environment;
+    }
 
     /**
      * login -> token -> users (with token) -> header(include token).
