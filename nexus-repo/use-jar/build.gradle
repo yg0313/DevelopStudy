@@ -3,7 +3,6 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'org.jetbrains.kotlin.jvm' version '1.6.21'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
-    id 'maven-publish'
 }
 
 group = 'com.example'
@@ -20,39 +19,4 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-//    implementation 'com.example:make-jar:0.0.1@jar'
-    implementation 'com.example:make-jar:0.0.1-20230109.145414-3'
 }
-
-publishing {
-    repositories {
-        maven {
-            allowInsecureProtocol true
-            url 'http://localhost:8081/repository/maven-snapshots/'
-        }
-    }
-}
-
-//publishing {
-//    publications {
-//        maven(MavenPublication) {
-//            groupId = group
-//            artifactId = rootProject.name
-//            version = version
-//            artifact("build/libs/$rootProject.name-$version"+".jar") {
-//                extension 'jar'
-//            }
-//        }
-//    }
-//    repositories {
-//        maven {
-//            allowInsecureProtocol true
-//            url 'http://localhost:8081/repository/maven-snapshots/'
-//            credentials {
-//                username 'admin'
-//                password 'admin'
-//            }
-//        }
-//    }
-//}
