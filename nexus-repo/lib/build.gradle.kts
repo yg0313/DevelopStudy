@@ -13,6 +13,17 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
+    maven {
+        allowInsecureProtocol true
+        credentials {
+            username repoUsername
+                    password repoPassword
+        }
+        url '넥서스저장소 url'
+        authentication {
+            basic(BasicAuthentication)
+        }
+    }
 }
 
 dependencies {
