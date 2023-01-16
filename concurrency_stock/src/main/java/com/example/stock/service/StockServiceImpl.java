@@ -13,7 +13,7 @@ public class StockServiceImpl implements StockService{
     private final StockRepository stockRepository;
 
     @Override
-    @Transactional //stockService 새로 만들어서 해당 메소드 실행.
+    //@Transactional //stockService 새로 만들어서 해당 메소드 실행.
     public synchronized void decreaseStock(Long productId, Long quantity) {
 
         Stock stock = stockRepository.findById(productId).orElseThrow();
