@@ -8,19 +8,11 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.3-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
     mavenCentral()
-//    maven {
-//        allowInsecureProtocol true
-//        credentials {
-//            username 'admin'
-//            password 'admin'
-//        }
-//        url 'http://localhost:8081/repository/maven-snapshots/'
-//    }
 }
 
 dependencies {
@@ -34,13 +26,9 @@ dependencies {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = group
-            artifactId = rootProject.name
-            version = version
-
-            artifact("build/libs/$rootProject.name-$version"+".jar") {
-                extension 'jar'
-            }
+            groupId = "com.yg.nexus" //nexus에서 사용할 groupId
+            artifactId = "make-jar" //artifactId
+            version = version //직접 명시 또는 gradle에 명명해놓은 버전. "버전-SNAPSHOT" 방식
         }
     }
     repositories {
