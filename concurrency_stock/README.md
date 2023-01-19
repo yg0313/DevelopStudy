@@ -4,4 +4,4 @@
 - Mysql을 활용한 방법들  
   - Pessimistic Lock: 실제로 데이터에 Lock을 걸어서 정합성을 맞추는 방법. exclusive lock을 걸게되면 다른 트랜잭션에서는 lock이 해제되기전에 데이터를 가져갈 수 없게된다. 데드락이 걸릴 수 있기때문에 주의하여 사용
   - Optimistic Lock: 실제로 Lock을 이용하지 않고 버전을 이용함으로써 정합성을 맞추는 방법. 먼저 테이터를 읽은 후 update를 수행할 때 현재 내가 읽은 버전이 맞는지 확인하여 업데이트. 내가 읽은 버전에서 수정사항이 생겼을 경우에는 application에서 다시 읽은후에 작업을 수행해야 한다.
-  - Named Lock: 이름을 가진 metadata locking. 일므을 가진 lock을 획득한 후 해제할때까지 다른 ㅣ세션은 이 lock을 획득할 수 없도록 한다. 주의사항으로 transaction이 종료될 때 lock 이 자동으로 해제되지 않는다. 별도의 명령어로 해제를 수행해주거나 선점시간이 끝나야 해제된다.
+  - Named Lock: 이름을 가진 metadata locking. 일므을 가진 lock을 획득한 후 해제할때까지 다른 세션은 이 lock을 획득할 수 없도록 한다. 주의사항으로 transaction이 종료될 때 lock 이 자동으로 해제되지 않는다. 별도의 명령어로 해제를 수행해주거나 선점시간이 끝나야 해제된다.
