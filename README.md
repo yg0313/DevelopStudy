@@ -16,3 +16,5 @@
 ### [aop - 스프링 AOP 구현](https://github.com/yg0313/DevelopStudy/tree/main/aop#%EC%8A%A4%ED%94%84%EB%A7%81-aop-%EA%B5%AC%ED%98%84)
 
 ### [msa - Spring Cloud로 개발하는 마이크로서비스 애플리케이션(MSA)](https://github.com/yg0313/DevelopStudy/tree/main/msa)
+
+### [재고시스템으로 알아보는 동시성이슈 해결방법](https://github.com/yg0313/DevelopStudy/tree/main/concurrency_stock) 
