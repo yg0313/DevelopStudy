@@ -17,8 +17,8 @@ public class StockServiceImpl implements StockService{
      * 여러 스레드에서 동시에 데이터 접근이 가능해지기때문에 레이스 컨디션 발생.
      */
     @Override
-    //@Transactional //stockService 새로 만들어서 해당 메소드 실행.
-    public synchronized void decreaseStock(Long productId, Long quantity) {
+    @Transactional //stockService 새로 만들어서 해당 메소드 실행.
+    public void decreaseStock(Long productId, Long quantity) {
 
         Stock stock = stockRepository.findById(productId).orElseThrow();
 
