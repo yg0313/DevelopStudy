@@ -28,6 +28,10 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+    // https://mvnrepository.com/artifact/org.redisson/redisson-spring-boot-starter
+    implementation("org.redisson:redisson-spring-boot-starter:3.18.1")
+
 }
 
 tasks.withType<Test> {
