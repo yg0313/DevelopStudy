@@ -34,6 +34,12 @@ logging:
   level:
     com.example.userservice: DEBUG
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans # config-server의 값을 refresh
+
 ## spring config-service로부터 정보를 가져올예정이므로 주석처리.
 #token:
 #  expiration_time: 86400000 # 유효기간 60*60*24*1000 == 하루
