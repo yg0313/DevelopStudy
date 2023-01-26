@@ -54,6 +54,15 @@ spring:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AuthorizationHeaderFilter
+        # actuator
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates: #조건절
+            - Path=/user-service/actuator/**
+            - Method=GET,POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
 
         - id: catalog-service
           uri: lb://CATALOG-SERVICE #eureka에 등록된 instanceName
@@ -65,5 +74,11 @@ spring:
           predicates: #조건절
             - Path=/order-service/**
 
+
 token:
   secret: user-token # 임의의 값
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace
