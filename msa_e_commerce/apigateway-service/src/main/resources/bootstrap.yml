@@ -3,3 +3,7 @@ spring:
     config:
       uri: http://127.0.0.1:8888 #config-server 포트번호
       name: ecommerce
+
+# config-server에서 읽어 오고자하는 프로필 지정
+  profiles:
+    active: dev
