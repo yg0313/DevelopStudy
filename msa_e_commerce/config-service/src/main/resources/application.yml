@@ -9,4 +9,5 @@ spring:
     config:
       server:
         git:
-          uri: file://C:\Study_git\DevelopStudy\git-local-repo
+          uri: 
+#          uri: file://C:\Study_git\DevelopStudy\git-local-repo
