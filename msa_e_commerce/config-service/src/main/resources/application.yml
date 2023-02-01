@@ -9,5 +9,7 @@ spring:
     config:
       server:
         git:
-          uri: 
+          uri: https://github.com/yg0313/config-repo
+#          username: private repo
+#          password: private repo
 #          uri: file://C:\Study_git\DevelopStudy\git-local-repo
