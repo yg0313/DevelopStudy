@@ -4,6 +4,13 @@ server:
 spring:
   application:
     name: user-service
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
   h2:
     console:
       enabled: true
@@ -38,7 +45,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans # config-server의 값을 refresh
+        include: refresh, health, beans, busrefresh # config-server의 값을 refresh
 
 ## spring config-service로부터 정보를 가져올예정이므로 주석처리.
 #token:
