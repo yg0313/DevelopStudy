@@ -5,5 +5,5 @@ spring:
       name: ecommerce
 
 # config-server에서 읽어 오고자하는 프로필 지정
-  profiles:
-    active: dev
+#  profiles:
+#    active: dev
