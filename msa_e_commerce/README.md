@@ -17,7 +17,19 @@
 - AMQP(Advanced Message Queuing Protocol), 메시지 지향 미들웨어를 위한 개방형 표준 응용 계층 프로토콜
   - 메시지 지향, 큐잉, 라우팅(P2P, Publisher-Subscriber), 신뢰성, 보안
   - Erlang, RabbitMQ에서 사용
-- Kfka 프로젝트
+- Kafka 프로젝트
   - Apache Software Foundation이 Scalr 언어로 개발한 오픈 소스 메시지 브로커 프로젝트
   - 분산형 스트리밍 플랫폼
   - 대용량의 데이터를 처리 가능한 메시징 시스템     
+
+### Rabbit MQ vs Kafka
+- Rabbit MQ
+  - 메시지 브로커
+  - 초당 20개 이상의 메시지를 소비자에게 전달
+  - 메시지 전달 보장, 시스템 간 메시지 전달
+  - 브로커, 소비자 중심
+- Kafka
+  - 초당 100k 이상의 이벤트 처리
+  - Pub/Sub, Topic에 메시지 전달
+  - Ack를 기다리지 않고(Sub가 데이터를 받았는지 안받았는지 관심x) 전달 가능 -> 성능이 더 빠른이유
+  - 생산자 중심  
