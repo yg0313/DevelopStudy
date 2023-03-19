@@ -42,7 +42,7 @@ public class PubSub {
                                     }
                                 }
                             }catch (RuntimeException e){
-                                subscriber.onError(e);
+                                subscriber.onError(e); // throw 대신 사용.
                             }
                         });
 
@@ -78,7 +78,11 @@ public class PubSub {
                 subscription.request(1);
             }
 
-            //에러 처리, try-catch 역할.
+            /**
+             * 에러 처리, try-catch 역할.
+             * throw 사용 X.
+             */
+
             @Override
             public void onError(Throwable throwable) {
                 System.out.println("PubSub.onError: " + throwable.getMessage());
