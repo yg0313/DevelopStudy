@@ -7,7 +7,10 @@ fun main(){
 //    coroutineScope()
 //    coroutineContext()
 //    launchCoroutine()
-    delayCoroutine()
+//    delayCoroutine()
+//    threadSleep()
+//    multiLaunch()
+    outOfBlocking()
 }
 
 /**
@@ -60,4 +63,62 @@ fun delayCoroutine() = runBlocking {
     println("runBlocking: ${Thread.currentThread().name}") //runBlocking: main
     delay(500L) //중단점 or suspensionPoint
     println("hello")
+}
+
+/**
+ * 코루틴 내에서 sleep.
+ * 실행결과: runBlocking: main -> hello -> launch: main -> world!
+ * 다른 코루틴 스코프에게 스레드를 양보하지않고, 스레드 자체가 쉬었다가 기존 코루틴 스코프 실행.
+ */
+fun threadSleep() = runBlocking {
+    launch{
+        println("launch: ${Thread.currentThread().name}") //launch: main
+        println("world!")
+    }
+    println("runBlocking: ${Thread.currentThread().name}") //runBlocking: main
+    Thread.sleep(500L) //중단점 or suspensionPoint
+    println("hello")
+}
+
+/**
+ * 한번에 여러 launch
+ * 실행 결과: runBlocking: main -> launch1: main -> launch2: main -> 1! -> 2! -> 3!
+ */
+fun multiLaunch() = runBlocking {
+    launch {
+        println("launch1: ${Thread.currentThread().name}") //2
+        delay(1000L)
+        println("3!") //6
+    }
+    launch {
+        println("launch2: ${Thread.currentThread().name}") //3
+        println("1!") //4
+    }
+    println("runBlocking: ${Thread.currentThread().name}") //1
+    delay(500L)
+    println("2!") //5
+}
+
+/**
+ * 상위 코루틴은 하위 코루틴을 끝까지 책임진다.
+ * runBlocking 안에 launch가 속해 있는데 계층화되어 구조적.
+ * runBlocking은 그 속에 포함된 launch가 다 끝나기 전까지 종료되지 않는다.
+ * 실행 결과: runBlocking: main -> launch1: main -> launch2: main -> 1! -> 2! -> 3! -> 4!
+ */
+fun outOfBlocking() {
+    runBlocking{ //계층적, 구조적
+        launch {
+            println("launch1: ${Thread.currentThread().name}")
+            delay(1000L)
+            println("3!")
+        }
+        launch {
+            println("launch2: ${Thread.currentThread().name}")
+            println("1!")
+        }
+        println("runBlocking: ${Thread.currentThread().name}")
+        delay(500L)
+        println("2!")
+    }
+    print("4!")
 }
