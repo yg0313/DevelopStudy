@@ -18,6 +18,9 @@ dependencies {
 
     implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.3.10.Final'
     implementation group: 'com.h2database', name: 'h2', version: '1.4.199'
+    // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+
 }
 
 test {

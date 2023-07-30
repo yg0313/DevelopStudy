@@ -3,6 +3,7 @@
              xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="hello">
+        <class>hellojpa.Member</class>
         <!-- 그래들 환경 -->
 
         <properties>
@@ -14,9 +15,9 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 
             <!-- 옵션 -->
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.use_sql_comments" value="true"/>
+            <property name="hibernate.show_sql" value="true"/> <!-- console창에 쿼리 보여줌. -->
+            <property name="hibernate.format_sql" value="true"/> <!-- console창에 쿼리 개행(pretty 형식) 보여줌. -->
+            <property name="hibernate.use_sql_comments" value="true"/> <!-- 어떤 쿼리 실행인지 설명 ex)/* insert hellojpa.Member*/ -->
 <!--            <property name="hibernate.hbm2ddl.auto" value="create"/>-->
         </properties>
     </persistence-unit>
