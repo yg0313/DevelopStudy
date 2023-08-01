@@ -22,3 +22,5 @@
 ### [The RED : 효과적인 비동기처리를 위한 Kotlin Coroutines & Flow 마스터](https://github.com/yg0313/DevelopStudy/tree/main/kotlin_coroutines)
 
 ### [스프링 DB 1편 - 데이터 접근 핵심 원리](https://github.com/yg0313/DevelopStudy/tree/main/jdbc)
+
+### [실전! 스프링 데이터 JPA](https://github.com/yg0313/DevelopStudy/tree/main/data-jpa)
