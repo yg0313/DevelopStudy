@@ -1,18 +1,26 @@
 package study.datajpa.entity
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 class Member(
-    val username: String
+    val username: String,
 ) {
 
-    @Id @GeneratedValue
-    var id: Long = 1L
+    @Id
+    @GeneratedValue
+    @Column(name = "member_id")
+    var id: Long? = null
+    var age: Int = 0
 
-    constructor() : this("")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    lateinit var team: Team
+
+    fun changeTeam(team: Team){
+        this.team = team
+        team.members.add(this)
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -32,5 +40,8 @@ class Member(
         return result
     }
 
+    override fun toString(): String {
+        return "Member(username='$username', age=$age, id=$id)"
+    }
 
 }

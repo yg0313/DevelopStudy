@@ -11,6 +11,18 @@ plugins {
 group = "study"
 version = "0.0.1-SNAPSHOT"
 
+allOpen {
+    annotation("javax.persistence.Entity")
+    annotation("javax.persistence.MappedSuperclass")
+    annotation("javax.persistence.Embeddable")
+}
+
+noArg {
+    annotation("javax.persistence.Entity")
+    annotation("javax.persistence.MappedSuperclass")
+    annotation("javax.persistence.Embeddable")
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_11
 }
