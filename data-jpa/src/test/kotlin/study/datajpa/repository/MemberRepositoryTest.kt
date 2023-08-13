@@ -20,6 +20,7 @@ class MemberRepositoryTest {
 
     @Test
     fun testMember(){
+        println("MemberRepositoryTest.testMember memberRepository:${memberRepository.javaClass}")
         val member = Member("memberA")
         val savedMember = memberRepository.save(member)
 
