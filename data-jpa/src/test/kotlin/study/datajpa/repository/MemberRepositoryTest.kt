@@ -1,6 +1,5 @@
 package study.datajpa.repository
 
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -29,5 +28,36 @@ class MemberRepositoryTest {
         assertThat(findMember.id).isEqualTo(member.id)
         assertThat(findMember.username).isEqualTo(member.username)
         assertThat(findMember).isEqualTo(member)
+    }
+
+    @Test
+    fun basicCRUD(){
+        val member1 = Member("member1")
+        val member2 = Member("member2")
+
+        memberRepository.save(member1)
+        memberRepository.save(member2)
+
+        //단건 조회 검증.
+        val findMember1 = memberRepository.findById(member1.id!!).get()
+        val findMember2 = memberRepository.findById(member2.id!!).get()
+        assertThat(findMember1).isEqualTo(member1)
+        assertThat(findMember2).isEqualTo(member2)
+
+        //리스트 조회 검증
+        val all = memberRepository.findAll()
+        assertThat(all.size).isEqualTo(2)
+
+        //카운트 검증
+        val count: Long = memberRepository.count()
+        assertThat(count).isEqualTo(2L)
+
+        //삭제 검증
+        memberRepository.delete(member1)
+        memberRepository.delete(member2)
+
+        val deletedCount = memberRepository.count()
+        assertThat(deletedCount).isEqualTo(0L)
+
     }
 }
