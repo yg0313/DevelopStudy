@@ -6,4 +6,6 @@ import study.datajpa.entity.Member
 interface MemberRepository: JpaRepository<Member, Long> {
 
     fun findByUsername(username: String): List<Member>
+
+    fun findByUsernameAndAgeGreaterThan(username: String, age: Int): List<Member>
 }
