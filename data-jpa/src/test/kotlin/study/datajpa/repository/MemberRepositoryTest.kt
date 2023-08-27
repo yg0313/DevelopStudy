@@ -78,4 +78,20 @@ class MemberRepositoryTest {
         assertThat(result.get(0).age).isEqualTo(20)
         assertThat(result.size).isEqualTo(1)
     }
+
+    @Test
+    fun testQuery(){
+        val m1 = Member("AAA").apply {
+            this.age = 10
+        }
+
+        val m2 = Member("BBB").apply {
+            this.age = 20
+        }
+        memberRepository.save(m1)
+        memberRepository.save(m2)
+
+        val result = memberRepository.findUser("AAA", 10)
+        assertThat(result[0]).isEqualTo(m1)
+    }
 }
