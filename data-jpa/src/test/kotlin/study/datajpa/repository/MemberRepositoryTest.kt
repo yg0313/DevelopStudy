@@ -1,6 +1,7 @@
 package study.datajpa.repository
 
 import org.assertj.core.api.Assertions.*
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -130,6 +131,25 @@ class MemberRepositoryTest {
         val memberDto = memberRepository.findMemberDto()
         memberDto.forEach { dto ->
             println("dto: $dto")
+        }
+    }
+
+    @Test
+    @DisplayName("컬렉션을 파라미터로 넘겨서 멤버 리스트 조회하기")
+    fun findByNames(){
+        val m1 = Member("AAA").apply {
+            this.age = 10
+        }
+
+        val m2 = Member("BBB").apply {
+            this.age = 20
+        }
+        memberRepository.save(m1)
+        memberRepository.save(m2)
+
+        val result = memberRepository.findByNames(listOf("AAA", "BBB"))
+        result.forEach {member ->
+            println("member: $member")
         }
     }
 }
