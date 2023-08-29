@@ -152,4 +152,24 @@ class MemberRepositoryTest {
             println("member: $member")
         }
     }
+
+    @Test
+    fun returnType(){
+        val m1 = Member("AAA").apply {
+            this.age = 10
+        }
+
+        val m2 = Member("BBB").apply {
+            this.age = 20
+        }
+        memberRepository.save(m1)
+        memberRepository.save(m2)
+
+        val aaa = memberRepository.findListByUsername("AAA")
+        println("aaa = ${aaa}")
+        val findMember = memberRepository.findMemberByUsername("AAA")
+        println("findMember = ${findMember}")
+        val optionalMember = memberRepository.findOptionalByUsername("AAA")
+        println("optionalMember = ${optionalMember}")
+    }
 }
