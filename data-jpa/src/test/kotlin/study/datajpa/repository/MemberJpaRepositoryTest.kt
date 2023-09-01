@@ -77,4 +77,40 @@ internal class MemberJpaRepositoryTest{
         assertThat(result?.get(0)?.age).isEqualTo(20)
         assertThat(result?.size).isEqualTo(1)
     }
+
+    @Test
+    fun paging() {
+        val m1 = Member("AAA").apply {
+            this.age = 10
+        }
+        val m2 = Member("AAA").apply {
+            this.age = 10
+        }
+        val m3 = Member("AAA").apply {
+            this.age = 10
+        }
+        val m4 = Member("AAA").apply {
+            this.age = 10
+        }
+        val m5 = Member("AAA").apply {
+            this.age = 10
+        }
+
+        memberJpaRepository.save(m1)
+        memberJpaRepository.save(m2)
+        memberJpaRepository.save(m3)
+        memberJpaRepository.save(m4)
+        memberJpaRepository.save(m5)
+
+        val age = 10;
+        val offset = 0;
+        val limit = 3;
+
+        val members = memberJpaRepository.findByPage(age, offset, limit)
+        val totalCount = memberJpaRepository.totalCount(age)
+
+        assertThat(members.size).isEqualTo(3)
+        assertThat(totalCount).isEqualTo(5)
+    }
+
 }

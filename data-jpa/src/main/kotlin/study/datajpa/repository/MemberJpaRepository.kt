@@ -47,4 +47,18 @@ class MemberJpaRepository {
                 .setParameter("age", age)
                 .resultList as MutableList<Member>?
     }
+
+    fun findByPage(age: Int, offset: Int, limit: Int): MutableList<Member>{
+        return em.createQuery("select m from Member m where m.age = :age order by m.username desc")
+                .setParameter("age", age)
+                .setFirstResult(offset) //페이지
+                .setMaxResults(limit) //가져올 데이터 갯수
+                .resultList as MutableList<Member>
+    }
+
+    fun totalCount(age: Int): Long{
+        return em.createQuery("select count(m) from Member m where m.age = :age", Long::class.javaObjectType)
+                .setParameter("age", age)
+                .singleResult
+    }
 }
