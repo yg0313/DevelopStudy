@@ -1,5 +1,7 @@
 package study.datajpa.repository
 
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
@@ -29,5 +31,11 @@ interface MemberRepository: JpaRepository<Member, Long> {
     fun findMemberByUsername(username: String): Member
     fun findOptionalByUsername(username: String): Optional<Member>
 
-
+    /**
+     * 데이터의 전체 갯수를 가져올때, join이 필요없는 경우 query와 countQuery를 
+     * 분리하여 작성함으로 성능 최적화를 만들수있다.
+     */
+    @Query(value = "select m from Member m left join m.team t",
+            countQuery = "select count(m) from Member m")
+    fun findByAge(age: Int, pageable: Pageable): Page<Member>
 }

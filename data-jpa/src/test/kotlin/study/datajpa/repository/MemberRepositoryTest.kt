@@ -5,8 +5,13 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Slice
+import org.springframework.data.domain.Sort
 import org.springframework.test.annotation.Rollback
 import org.springframework.transaction.annotation.Transactional
+import study.datajpa.dto.MemberDto
 import study.datajpa.entity.Member
 import study.datajpa.entity.Team
 
@@ -172,4 +177,86 @@ class MemberRepositoryTest {
         val optionalMember = memberRepository.findOptionalByUsername("AAA")
         println("optionalMember = ${optionalMember}")
     }
+
+    @Test
+    fun paging() {
+        val m1 = Member("member1").apply {
+            this.age = 10
+        }
+        val m2 = Member("member2").apply {
+            this.age = 10
+        }
+        val m3 = Member("member3").apply {
+            this.age = 10
+        }
+        val m4 = Member("member4").apply {
+            this.age = 10
+        }
+        val m5 = Member("member5").apply {
+            this.age = 10
+        }
+
+        memberRepository.save(m1)
+        memberRepository.save(m2)
+        memberRepository.save(m3)
+        memberRepository.save(m4)
+        memberRepository.save(m5)
+
+        val age  = 10
+        val pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "username"))
+
+        val page: Page<Member> = memberRepository.findByAge(age, pageRequest)
+
+        val toMap: Page<MemberDto> = page.map { member ->
+            MemberDto(member.id!!, member.username, null)
+        }
+
+        val content = page.content
+        val totalElements = page.totalElements //totalCount
+
+        assertThat(content.size).isEqualTo(3)
+        assertThat(page.totalElements).isEqualTo(totalElements)
+        assertThat(page.number).isEqualTo(0)
+        assertThat(page.totalPages).isEqualTo(2)
+        assertThat(page.isFirst).isTrue()
+        assertThat(page.hasNext()).isTrue()
+    }
+
+    @Test
+    fun slice() {
+        val m1 = Member("member1").apply {
+            this.age = 10
+        }
+        val m2 = Member("member2").apply {
+            this.age = 10
+        }
+        val m3 = Member("member3").apply {
+            this.age = 10
+        }
+        val m4 = Member("member4").apply {
+            this.age = 10
+        }
+        val m5 = Member("member5").apply {
+            this.age = 10
+        }
+
+        memberRepository.save(m1)
+        memberRepository.save(m2)
+        memberRepository.save(m3)
+        memberRepository.save(m4)
+        memberRepository.save(m5)
+
+        val age  = 10
+        val pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "username"))
+
+        val page: Slice<Member> = memberRepository.findByAge(age, pageRequest)
+
+        val content = page.content
+
+        assertThat(content.size).isEqualTo(3)
+        assertThat(page.number).isEqualTo(0)
+        assertThat(page.isFirst).isTrue()
+        assertThat(page.hasNext()).isTrue()
+    }
+
 }
