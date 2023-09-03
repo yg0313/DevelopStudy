@@ -4,7 +4,7 @@ import javax.persistence.*
 
 @Entity
 class Member(
-    val username: String,
+    var username: String,
 ) {
 
     @Id

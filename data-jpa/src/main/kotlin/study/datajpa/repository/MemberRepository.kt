@@ -2,14 +2,13 @@ package study.datajpa.repository
 
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
-import org.springframework.data.jpa.repository.EntityGraph
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.Modifying
-import org.springframework.data.jpa.repository.Query
+import org.springframework.data.jpa.repository.*
 import org.springframework.data.repository.query.Param
 import study.datajpa.dto.MemberDto
 import study.datajpa.entity.Member
-import java.util.Optional
+import java.util.*
+import javax.persistence.LockModeType
+import javax.persistence.QueryHint
 
 interface MemberRepository: JpaRepository<Member, Long> {
 
@@ -57,4 +56,11 @@ interface MemberRepository: JpaRepository<Member, Long> {
     @EntityGraph(attributePaths = ["team"])
     @Query("select m from Member m")
     fun findMemberEntityGraph(): MutableList<Member>
+
+    @QueryHints(value = [QueryHint(name = "org.hibernate.readOnly", value = "true")])
+    fun findReadOnlyByUsername(username: String): Member
+
+    //비관적 락 jpa 버전
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    fun findLockByUsername(username: String): List<Member>
 }
