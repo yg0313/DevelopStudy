@@ -3,6 +3,7 @@ package study.datajpa.repository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import study.datajpa.dto.MemberDto
@@ -38,4 +39,8 @@ interface MemberRepository: JpaRepository<Member, Long> {
     @Query(value = "select m from Member m left join m.team t",
             countQuery = "select count(m) from Member m")
     fun findByAge(age: Int, pageable: Pageable): Page<Member>
+
+    @Modifying(clearAutomatically = true) //update 실행시 필요. clearAutomatically -> 영속성 컨텍스트 클리어.
+    @Query("update Member m set m.age = m.age + 1 where m.age>= :age")
+    fun bulkAgePlus(@Param("age") age: Int): Int
 }

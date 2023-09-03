@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional
 import study.datajpa.dto.MemberDto
 import study.datajpa.entity.Member
 import study.datajpa.entity.Team
+import javax.persistence.EntityManager
+import javax.persistence.PersistenceContext
 
 @SpringBootTest
 @Transactional
@@ -24,6 +26,8 @@ class MemberRepositoryTest {
     lateinit var memberRepository: MemberRepository
     @Autowired
     lateinit var teamRepository: TeamRepository
+    @PersistenceContext
+    lateinit var entityManager: EntityManager
 
     @Test
     fun testMember(){
@@ -259,4 +263,46 @@ class MemberRepositoryTest {
         assertThat(page.hasNext()).isTrue()
     }
 
+
+    @Test
+    fun bulkUpdate(){
+        val m1 = Member("member1").apply {
+            this.age = 10
+        }
+        val m2 = Member("member2").apply {
+            this.age = 19
+        }
+        val m3 = Member("member3").apply {
+            this.age = 20
+        }
+        val m4 = Member("member4").apply {
+            this.age = 21
+        }
+        val m5 = Member("member5").apply {
+            this.age = 40
+        }
+
+        memberRepository.save(m1)
+        memberRepository.save(m2)
+        memberRepository.save(m3)
+        memberRepository.save(m4)
+        memberRepository.save(m5)
+
+        val resultCount = memberRepository.bulkAgePlus(20)
+        var result = memberRepository.findByUsername("member5")
+        var member5 = result[0]
+        println("member5 = ${member5}") // age가 벌크연산이 일어나서 업데이트 되지 않은 값(40)으로 그대로 나옴 -> 영속성 컨텍스트에서 관리하는 m5의 객체값은 그대로이기때문.
+
+
+        entityManager.flush()
+        entityManager.clear()
+
+        result = memberRepository.findByUsername("member5")
+        member5 = result[0]
+        //entityManager를 통해 영속성 컨텍스트를 clear 이후 다시 가져옴으로써 수정된 데이터 확인가능.
+        //mybatis와 같이 쓸때도 마찬 가지 작업 필요.
+        println("member5 = ${member5}") 
+
+        assertThat(resultCount).isEqualTo(3)
+    }
 }
