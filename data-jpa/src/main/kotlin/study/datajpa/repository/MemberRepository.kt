@@ -2,6 +2,7 @@ package study.datajpa.repository
 
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.data.jpa.repository.EntityGraph
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
@@ -43,4 +44,17 @@ interface MemberRepository: JpaRepository<Member, Long> {
     @Modifying(clearAutomatically = true) //update 실행시 필요. clearAutomatically -> 영속성 컨텍스트 클리어.
     @Query("update Member m set m.age = m.age + 1 where m.age>= :age")
     fun bulkAgePlus(@Param("age") age: Int): Int
+
+    @Query("select m from Member m left join fetch m.team")
+    fun findMemberFetchJoin(): List<Member>
+
+    @EntityGraph(attributePaths = ["team"])
+    override fun findAll(): MutableList<Member>
+
+    /**
+     * override fun findAll()와 결과값 동일.
+     */
+    @EntityGraph(attributePaths = ["team"])
+    @Query("select m from Member m")
+    fun findMemberEntityGraph(): MutableList<Member>
 }

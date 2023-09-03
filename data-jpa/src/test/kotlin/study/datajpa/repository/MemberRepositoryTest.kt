@@ -305,4 +305,40 @@ class MemberRepositoryTest {
 
         assertThat(resultCount).isEqualTo(3)
     }
+
+    @Test
+    fun findMemberLazy(){
+        //given
+        //member1 -> teamA
+        //member2 -> teamB
+
+        val teamA = Team("teamA")
+        val teamB = Team("teamB")
+
+        teamRepository.save(teamA)
+        teamRepository.save(teamB)
+
+        val m1 = Member("member1").apply {
+            age = 10
+            team = teamA
+        }
+        val m2 = Member("member2").apply {
+            age = 10
+            team = teamB
+        }
+
+        memberRepository.save(m1)
+        memberRepository.save(m2)
+
+        entityManager.flush()
+        entityManager.clear()
+
+        //when
+        val members = memberRepository.findAll()
+        members.forEach { member ->
+            println("member = ${member.username}")
+            println("member.team.javaClass = ${member.team.javaClass}") //Team$HibernateProxy$FlOCzxft 팀을 조회하기전에는 가짜객체를 생성해둠.
+            println("member.team.name = ${member.team.name}")
+        }
+    }
 }
