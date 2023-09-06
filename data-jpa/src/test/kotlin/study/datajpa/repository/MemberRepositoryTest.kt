@@ -382,4 +382,10 @@ class MemberRepositoryTest {
         //when
         val findMember = memberRepository.findLockByUsername("member1")
     }
+
+    @Test
+    fun callCustom(){
+        val result = memberRepository.findMemberCustom()
+
+    }
 }
