@@ -80,6 +80,8 @@ class MemberTest{
 
         //then
         println("findMember.createDate = ${findMember.createDate}")
-        println("findMember.updateDate = ${findMember.updateDate}")
+        println("findMember.updateDate = ${findMember.lastModifiedDate}")
+        println("findMember.createdBy = ${findMember.createdBy}")
+        println("findMember.lastModifiedBy = ${findMember.lastModifiedBy}")
     }
 }
