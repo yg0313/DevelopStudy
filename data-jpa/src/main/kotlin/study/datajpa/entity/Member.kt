@@ -5,7 +5,7 @@ import javax.persistence.*
 @Entity
 class Member(
     var username: String,
-) {
+): JpaBaseEntity() {
 
     @Id
     @GeneratedValue

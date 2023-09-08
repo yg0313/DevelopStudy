@@ -6,7 +6,7 @@ import javax.persistence.*
 @Entity
 class Team(
     val name: String
-) {
+):JpaBaseEntity() {
 
     @Id @GeneratedValue
     @Column(name="team_id")
