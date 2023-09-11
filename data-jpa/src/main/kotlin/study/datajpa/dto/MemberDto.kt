@@ -1,12 +1,9 @@
 package study.datajpa.dto
 
-class MemberDto (
+
+data class MemberDto (
         val id: Long,
         val username: String,
         val teamName: String?
-){
-
-    override fun toString(): String {
-        return "MemberDto(id=$id, username='$username', teamName='$teamName')"
-    }
-}
+)
+//TODO 자바의 메소드 레퍼런스 식처럼 만들어보기.

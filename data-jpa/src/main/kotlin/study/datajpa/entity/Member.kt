@@ -15,7 +15,7 @@ class Member(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
-    lateinit var team: Team
+    var team: Team? = null
 
     fun changeTeam(team: Team){
         this.team = team
