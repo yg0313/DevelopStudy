@@ -35,7 +35,7 @@ class MemberController(private val memberRepository: MemberRepository) {
         return memberDtoPage
     }
 
-    @PostConstruct
+//    @PostConstruct
     fun init(){
         for(i in 1..100){
             memberRepository.save(Member("member$i")
