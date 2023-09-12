@@ -337,8 +337,8 @@ class MemberRepositoryTest {
         val members = memberRepository.findAll()
         members.forEach { member ->
             println("member = ${member.username}")
-            println("member.team.javaClass = ${member.team.javaClass}") //Team$HibernateProxy$FlOCzxft 팀을 조회하기전에는 가짜객체를 생성해둠.
-            println("member.team.name = ${member.team.name}")
+            println("member.team.javaClass = ${member.team?.javaClass}") //Team$HibernateProxy$FlOCzxft 팀을 조회하기전에는 가짜객체를 생성해둠.
+            println("member.team.name = ${member.team?.name}")
         }
     }
 
