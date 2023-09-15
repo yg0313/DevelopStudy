@@ -10,7 +10,7 @@ import java.util.*
 import javax.persistence.LockModeType
 import javax.persistence.QueryHint
 
-interface MemberRepository: JpaRepository<Member, Long>, MemberRepositoryCustom {
+interface MemberRepository: JpaRepository<Member, Long>, MemberRepositoryCustom, JpaSpecificationExecutor<Member> {
 
     fun findByUsername(username: String): List<Member>
 

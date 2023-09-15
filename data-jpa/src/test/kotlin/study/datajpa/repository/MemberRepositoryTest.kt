@@ -388,4 +388,28 @@ class MemberRepositoryTest {
         val result = memberRepository.findMemberCustom()
 
     }
+
+    @Test
+    fun specBasic(){
+        val teamA = Team("teamA")
+        entityManager.persist(teamA)
+
+        val m1 = Member("member1").apply {
+            age = 10
+        }
+        val m2 = Member("member2").apply {
+            age = 10
+        }
+
+        entityManager.persist(m1)
+        entityManager.persist(m2)
+
+        entityManager.flush()
+        entityManager.clear()
+
+        val spec = MemberSpec.username("member1").and(MemberSpec.teamName("teamA"))
+        val result = memberRepository.findAll(spec)
+
+        assertThat(result.size).isEqualTo(1)
+    }
 }
